@@ -89,6 +89,40 @@
 
     .nav-dot:hover::after { opacity: 1; }
 
+    /* ===== ORIENTATION LOCK ===== */
+    .orientation-lock {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(0, 19, 77, 0.96);
+      color: #fff;
+      text-align: center;
+    }
+
+    .orientation-lock-card {
+      max-width: 420px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 12px;
+      padding: 20px 22px;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .orientation-lock-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .orientation-lock-card p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.45;
+    }
+
     /* ===== SECTIONS ===== */
     section {
       min-height: 100vh;
@@ -856,7 +890,15 @@
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
-      .nav { display: none; }
+      .nav {
+        right: 10px;
+        gap: 8px;
+      }
+      .nav-dot {
+        width: 8px;
+        height: 8px;
+      }
+      .nav-dot::after { display: none; }
       .project-grid { grid-template-columns: 1fr; }
       .two-col { grid-template-columns: 1fr; }
       section { padding: var(--section-pad) 24px; }
@@ -865,6 +907,12 @@
       .risk-mit { grid-column: 2; }
       .chain { flex-direction: column; align-items: stretch; }
       .chain-arrow { transform: rotate(90deg); text-align: center; }
+    }
+
+    @media (max-width: 1024px) and (orientation: portrait) {
+      .orientation-lock { display: flex; }
+      .nav { display: none; }
+      body { overflow: hidden; }
     }
   </style>
 </head>
@@ -881,6 +929,13 @@
     <a class="nav-dot" href="#retos" data-label="Retos y blindajes"></a>
     <a class="nav-dot" href="#cierre" data-label="Cierre"></a>
   </nav>
+
+  <div class="orientation-lock" aria-live="polite">
+    <div class="orientation-lock-card">
+      <h3>Gira tu tel&eacute;fono a horizontal</h3>
+      <p>Esta presentaci&oacute;n est&aacute; optimizada para verse en landscape en m&oacute;vil.</p>
+    </div>
+  </div>
 
   <!-- =============================== -->
   <!-- HERO -->

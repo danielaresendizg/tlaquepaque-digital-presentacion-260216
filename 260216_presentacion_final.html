@@ -1,0 +1,1318 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tlaquepaque Digital — Daniela Reséndiz</title>
+  <style>
+    :root {
+      --blue: #0000ff;
+      --navy: #00134D;
+      --light-blue: #C5E2FF;
+      --red: #FF0000;
+      --yellow: #FFDE21;
+      --dark: #1a1a2e;
+      --ink: #222;
+      --muted: #666;
+      --bg: #ffffff;
+      --section-pad: clamp(28px, 4.5vh, 64px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1.5px solid var(--blue);
+      background: transparent;
+      cursor: pointer;
+      transition: all 200ms ease;
+      position: relative;
+    }
+
+    .nav-dot.active {
+      background: var(--blue);
+      transform: scale(1.3);
+    }
+
+    .nav-dot::after {
+      content: attr(data-label);
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--blue);
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 150ms ease;
+    }
+
+    .nav-dot:hover::after { opacity: 1; }
+
+    /* ===== SECTIONS ===== */
+    section {
+      min-height: 100vh;
+      padding: var(--section-pad) clamp(24px, 6vw, 120px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 clamp(40px, 8vw, 160px);
+      position: relative;
+      overflow: hidden;
+      opacity: 1;
+      transform: none;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 6px;
+      height: 100%;
+      background: var(--red);
+    }
+
+    .hero-overtitle {
+      font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--light-blue);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.08;
+      margin-bottom: 20px;
+      max-width: 700px;
+    }
+
+    .hero h1 span { color: var(--light-blue); }
+
+    .hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.3rem);
+      font-weight: 300;
+      max-width: 600px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 40px;
+    }
+
+    .hero-author {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .hero-date {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 6px;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    .section-number {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--blue);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 24px;
+      max-width: 700px;
+    }
+
+    .section-lead {
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      color: var(--muted);
+      max-width: 640px;
+      margin-bottom: 40px;
+      line-height: 1.65;
+    }
+
+    .accent { color: var(--blue); }
+    .accent-red { color: var(--red); }
+
+    /* ===== CARDS ===== */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 24px;
+      transition: border-color 200ms;
+    }
+
+    .card:hover { border-color: var(--blue); }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .tag-navy { background: var(--navy); color: #fff; }
+    .tag-blue { background: var(--blue); color: #fff; }
+    .tag-lightblue { background: var(--light-blue); color: var(--navy); }
+    .tag-red { background: var(--red); color: #fff; }
+
+    .card h4 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .card-stat {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--blue);
+      margin-bottom: 4px;
+    }
+
+    /* ===== CREDENTIAL GRID ===== */
+    .cred-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      max-width: 900px;
+    }
+
+    .cred-item {
+      padding: 20px;
+      border-left: 3px solid var(--blue);
+      background: #f8f9ff;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .cred-item h4 {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .cred-item p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    /* ===== PROJECT CARDS ===== */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      max-width: 1120px;
+      width: 100%;
+    }
+
+    .project-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 200ms, transform 200ms;
+    }
+
+    .project-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-2px);
+    }
+
+    .project-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      background: #f0f0f0;
+    }
+
+    .project-img.contain {
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .project-img.chennai {
+      height: 280px;
+    }
+
+    .project-img.evidencia {
+      height: 280px;
+    }
+
+    .project-body {
+      padding: 20px;
+    }
+
+    .project-body h4 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .project-body h4.one-line {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 0.92rem;
+    }
+
+    .project-body p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .project-tags.single-row {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .project-tags.single-row::-webkit-scrollbar { display: none; }
+
+    .project-tag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid var(--blue);
+      color: var(--blue);
+      white-space: nowrap;
+    }
+
+    @media (min-width: 769px) {
+      .project-body p.sintesis {
+        min-height: 120px;
+      }
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--blue);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 150ms;
+    }
+
+    .project-link:hover { border-color: var(--blue); }
+
+    /* ===== QUOTE ===== */
+    .quote-block {
+      max-width: 700px;
+      border-left: 4px solid var(--blue);
+      padding: 20px 24px;
+      margin: 24px 0;
+      background: #f8f9ff;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .quote-block p {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--navy);
+      line-height: 1.55;
+      font-style: italic;
+    }
+
+    /* ===== DIAGRAM EMBED ===== */
+    .diagram-container {
+      max-width: 1120px;
+      width: 100%;
+      margin: 20px 0;
+    }
+
+    /* Full-bleed diagram only where we opt-in (e.g., Arquitectura). */
+    @media (min-width: 769px) {
+      .diagram-container.wide {
+        max-width: none;
+        /* Small bleed to keep it prominent without covering the nav dots. */
+        width: calc(100% + 96px);
+        margin-left: -48px;
+        margin-right: -48px;
+      }
+    }
+
+    .diagram-container img,
+    .diagram-container iframe {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .diagram-container iframe {
+      height: min(90vh, 920px);
+      background: #fff;
+    }
+
+    .diagram-embed {
+      position: relative;
+    }
+
+    /* Prevent surprise zoom: require explicit click to interact with the embedded diagram. */
+    .diagram-embed iframe {
+      pointer-events: none;
+    }
+
+    .diagram-embed.is-active iframe {
+      pointer-events: auto;
+    }
+
+    .diagram-overlay {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(3px);
+      border-radius: 12px;
+      border: 1px solid #e0e0e0;
+      cursor: pointer;
+      transition: opacity 160ms ease;
+    }
+
+    .diagram-embed.is-active .diagram-overlay {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .diagram-overlay .overlay-card {
+      max-width: 560px;
+      width: min(560px, 100%);
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 14px 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      color: var(--ink);
+    }
+
+    .diagram-overlay .overlay-title {
+      font-weight: 900;
+      color: var(--navy);
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+
+    .diagram-overlay .overlay-text {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.35;
+    }
+
+    .diagram-exit {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 2;
+      display: none;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1.5px solid #e0e0e0;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+
+    .diagram-embed.is-active .diagram-exit {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .diagram-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      padding: 8px 16px;
+      border: 1.5px solid var(--blue);
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--blue);
+      text-decoration: none;
+      transition: all 150ms;
+    }
+
+    .diagram-link:hover {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    /* ===== TIMELINE ===== */
+    .timeline {
+      max-width: 800px;
+      position: relative;
+      padding-left: 40px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--blue), var(--light-blue));
+    }
+
+    .tl-item {
+      position: relative;
+      margin-bottom: 28px;
+      padding: 16px 20px;
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 10px;
+      transition: border-color 200ms;
+    }
+
+    .tl-item:hover { border-color: var(--blue); }
+
+    .tl-item::before {
+      content: "";
+      position: absolute;
+      left: -33px;
+      top: 22px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 2px var(--blue);
+    }
+
+    .tl-item.gate::before {
+      background: var(--red);
+      box-shadow: 0 0 0 2px var(--red);
+    }
+
+    .tl-label {
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+      margin-bottom: 4px;
+    }
+
+    .tl-item.gate .tl-label { color: var(--red); }
+
+    .tl-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .tl-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    /* ===== RISK TABLE ===== */
+    .risk-grid {
+      display: grid;
+      gap: 12px;
+      max-width: 800px;
+    }
+
+    .risk-item {
+      display: grid;
+      grid-template-columns: 36px 1fr auto;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      border: 1px solid #e8e8e8;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .risk-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 0.8rem;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .risk-high { background: var(--red); }
+    .risk-med { background: #ff8c00; }
+    .risk-low { background: var(--blue); }
+
+    .risk-text h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 2px;
+    }
+
+    .risk-text p {
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    .risk-mit {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--blue);
+      text-align: right;
+      min-width: 120px;
+    }
+
+    /* ===== QUESTIONS ===== */
+    .q-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      max-width: 900px;
+    }
+
+    .q-card {
+      background: #f8f9ff;
+      border: 1.5px solid var(--light-blue);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .q-num {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+
+    .q-card h4 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+
+    .q-card p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    /* ===== CLOSE ===== */
+    .close-section {
+      background: var(--navy);
+      color: #fff;
+      text-align: center;
+      align-items: center;
+      min-height: 60vh;
+    }
+
+    .close-section .section-title {
+      color: #fff;
+      max-width: none;
+    }
+
+    .close-section .section-lead {
+      color: rgba(255,255,255,0.7);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .close-items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+      text-align: left;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .close-item {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.85);
+      padding: 12px 16px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      transition: border-color 200ms;
+    }
+
+    .close-item:hover { border-color: rgba(255,255,255,0.4); }
+
+    .close-item strong { color: #fff; }
+
+    .contact {
+      margin-top: 40px;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .contact a {
+      color: var(--light-blue);
+      text-decoration: none;
+    }
+
+    /* ===== RACI GRID ===== */
+    .raci-points {
+      display: grid;
+      gap: 10px;
+      max-width: 700px;
+    }
+
+    .raci-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 16px;
+      background: #f8f9ff;
+      border-radius: 8px;
+    }
+
+    .raci-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      font-size: 0.68rem;
+      font-weight: 900;
+      color: #fff;
+      background: var(--blue);
+    }
+
+    .raci-row p {
+      font-size: 0.82rem;
+      color: var(--ink);
+      line-height: 1.45;
+    }
+
+    .raci-row strong { color: var(--navy); }
+
+    /* ===== TWO COL ===== */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 900px;
+      align-items: start;
+    }
+
+    /* ===== CHAIN ===== */
+    .chain {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      max-width: 900px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .chain-step {
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-align: center;
+      min-width: 100px;
+    }
+
+    .chain-arrow {
+      font-size: 1.2rem;
+      color: var(--muted);
+      padding: 0 4px;
+    }
+
+    .chain-navy { background: var(--navy); color: #fff; }
+    .chain-blue { background: var(--blue); color: #fff; }
+    .chain-lightblue { background: var(--light-blue); color: var(--navy); }
+    .chain-red { background: var(--red); color: #fff; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav { display: none; }
+      .project-grid { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+      section { padding: var(--section-pad) 24px; }
+      .hero { padding: 0 28px; }
+      .risk-item { grid-template-columns: 36px 1fr; }
+      .risk-mit { grid-column: 2; }
+      .chain { flex-direction: column; align-items: stretch; }
+      .chain-arrow { transform: rotate(90deg); text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV DOTS -->
+  <nav class="nav" id="nav">
+    <a class="nav-dot active" href="#hero" data-label="Inicio"></a>
+    <a class="nav-dot" href="#quien" data-label="Quién soy"></a>
+    <a class="nav-dot" href="#evidencia" data-label="Proyectos"></a>
+    <a class="nav-dot" href="#lectura" data-label="Mi lectura"></a>
+    <a class="nav-dot" href="#marco" data-label="Marco institucional"></a>
+    <a class="nav-dot" href="#arquitectura" data-label="Arquitectura"></a>
+    <a class="nav-dot" href="#retos" data-label="Retos y blindajes"></a>
+    <a class="nav-dot" href="#cierre" data-label="Cierre"></a>
+  </nav>
+
+  <!-- =============================== -->
+  <!-- HERO -->
+  <!-- =============================== -->
+  <section class="hero visible" id="hero">
+    <p class="hero-overtitle">Propuesta de arquitectura operativa</p>
+    <h1>De la brecha<br>al <span>bienestar</span></h1>
+    <p class="hero-sub">
+      Cómo implementar Tlaquepaque Digital con evidencia territorial:
+      un sistema de decisión pública trazable, medible y corregible.
+    </p>
+    <p class="hero-author">Daniela Reséndiz García</p>
+    <p class="hero-date">Febrero 2026</p>
+    <p class="hero-scroll">scroll</p>
+  </section>
+
+  <!-- =============================== -->
+  <!-- 01 QUIEN SOY -->
+  <!-- =============================== -->
+  <section id="quien">
+    <p class="section-number">01 &mdash; Quién soy</p>
+    <h2 class="section-title">Política urbana<br>+ ciencia de datos espaciales</h2>
+    <p class="section-lead">
+      He participado en proyectos de <strong class="accent">política pública, planeación espacial y ciencia de datos</strong>,
+      integrando evidencia territorial para orientar decisiones públicas.
+    </p>
+
+    <div class="cred-grid">
+      <div class="cred-item">
+        <h4>Puente entre política, investigación y tecnología</h4>
+        <p>Integro política pública, investigación aplicada y herramientas GeoAI para traducir evidencia en decisiones de alto impacto.</p>
+      </div>
+      <div class="cred-item">
+        <h4>Experiencia en el Gobierno de México</h4>
+        <p>Impulsé normas oficiales, programas de prevención y reconstrucción, y proyectos técnicos especializados desde posiciones de alto nivel.</p>
+      </div>
+      <div class="cred-item">
+        <h4>Formación internacional sólida</h4>
+        <p>MSc en Space Syntax (Planificación Espacial en Ciudades), The Bartlett UCL, con distinción, y formación adicional en la Architectural Association y la USP.</p>
+      </div>
+      <div class="cred-item">
+        <h4>Academia + proyección global</h4>
+        <p>Docencia universitaria en México y participación en foros internacionales con Japón, Países Bajos, Kenia e Italia.</p>
+      </div>
+    </div>
+
+    <p style="margin-top: 24px; font-size: 0.9rem;">
+      <a href="https://danielaresendizg.github.io/es/cv.html" target="_blank"
+         rel="noopener" style="color: var(--blue); text-decoration: none; font-weight: 700;">
+        Ver CV (español) &rarr;
+      </a>
+    </p>
+
+  </section>
+
+  <!-- =============================== -->
+  <!-- 02 EVIDENCIA -->
+  <!-- =============================== -->
+  <section id="evidencia">
+    <p class="section-number">02 &mdash; Evidencia</p>
+    <h2 class="section-title">Lo que he producido:<br>análisis &rarr; decisión</h2>
+    <div class="project-grid">
+      <!-- CDMX -->
+      <div class="project-card">
+        <img class="project-img evidencia" src="img/slide36_img1.png"
+             alt="Desigualdad térmica CDMX"
+             onerror="this.style.background='linear-gradient(135deg,#C5E2FF,#0000ff)'; this.style.height='160px'; this.alt=''"  />
+        <div class="project-body">
+          <h4 class="one-line">Desigualdad térmica, Ciudad de México (México)</h4>
+          <p class="sintesis">
+            Lancet Countdown 2025 reporta un aumento de 23% en mortalidad asociada al calor
+            desde los 90 y la pérdida de 640 mil millones de horas potenciales de trabajo en 2024
+            (Romanello et al., 2025). Este proyecto muestra cómo el calor extremo profundiza
+            desigualdades en la Ciudad de México y dónde priorizar enfriamiento con mayor beneficio social.
+          </p>
+          <div class="project-tags single-row">
+            <span class="project-tag">Landsat</span>
+            <span class="project-tag">Space Syntax</span>
+            <span class="project-tag">SOLWEIG</span>
+            <span class="project-tag">Multi-escala</span>
+          </div>
+          <a class="project-link" href="https://danielaresendizg.github.io/thermal_inequalities/"
+             target="_blank" rel="noopener">
+            Ver proyecto &rarr;
+          </a>
+          <br />
+          <a class="project-link" href="https://github.com/danielaresendizg/urban-heat-mexico-city"
+             target="_blank" rel="noopener">
+            Repositorio GitHub &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Chennai -->
+      <div class="project-card">
+        <img class="project-img contain chennai evidencia" src="img/chennai_fragment.jpg"
+             alt="Mapas de Space Syntax en Chennai: accesibilidad normal vs inundación"
+             onerror="this.style.background='linear-gradient(135deg,#00134D,#0000ff)'; this.style.height='160px'; this.alt=''" />
+        <div class="project-body">
+          <h4 class="one-line">Accesibilidad y resiliencia ante inundación, Chennai (India)</h4>
+          <p class="sintesis">
+            Las inundaciones urbanas interrumpen servicios esenciales y exponen desigualdades estructurales.
+            Este estudio modela la pérdida de accesibilidad en Chennai bajo un escenario de retorno de 100 años,
+            combinando Space Syntax con redes viales, usos de suelo e infraestructura crítica.
+            Con ello identifica dónde colapsa la accesibilidad y qué zonas priorizar para refugios y evacuación.
+          </p>
+          <div class="project-tags single-row">
+            <span class="project-tag">Network Analysis</span>
+            <span class="project-tag">Machine Learning</span>
+            <span class="project-tag">Datos abiertos</span>
+            <span class="project-tag">Transferible</span>
+          </div>
+          <a class="project-link" href="https://danielaresendizg.github.io/chennai_research/"
+             target="_blank" rel="noopener">
+            Ver proyecto &rarr;
+          </a>
+          <br />
+          <a class="project-link" href="https://github.com/danielaresendizg/flood-accessibility-chennai"
+             target="_blank" rel="noopener">
+            Repositorio GitHub &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 24px; font-size: 0.82rem; color: var(--muted);">
+      <a href="https://danielaresendizg.github.io/en/publication.html" target="_blank"
+         rel="noopener" style="color: var(--blue); text-decoration: none; font-weight: 600;">
+        Publicaciones &rarr;
+      </a>
+    </p>
+  </section>
+
+  <!-- =============================== -->
+  <!-- 03 MI LECTURA -->
+  <!-- =============================== -->
+  <section id="lectura">
+    <p class="section-number">03 &mdash; Mi lectura del proyecto</p>
+    <h2 class="section-title">Un sistema municipal para convertir<br>
+      <span class="accent">información territorial en decisiones<br>públicas trazables</span>
+    </h2>
+
+    <div class="quote-block">
+      <p>
+        Lo que falta es definir <strong>cómo se opera</strong>: qué se mide primero, cómo se decide,
+        cómo se conecta al presupuesto y cómo se aprende en cada ciclo. El canal fiscal
+        (predial, eficiencia de cobro y base gravable) sostiene la capacidad de inversión,
+        pero no sustituye el objetivo central: <strong>cerrar brechas de bienestar</strong>.
+      </p>
+    </div>
+
+    <p style="font-size: 0.82rem; color: var(--muted); margin-top: 16px; max-width: 640px;">
+      Lo cr&iacute;tico son las <strong>interfaces</strong>: c&oacute;mo el ranking se vuelve portafolio, c&oacute;mo el portafolio se vuelve PbR/MIR,
+      y c&oacute;mo M&amp;E dispara ajustes (no solo reportes). Ah&iacute; es donde el dato se convierte en cambio territorial medible.
+    </p>
+  </section>
+
+  <!-- =============================== -->
+  <!-- 04 MARCO INSTITUCIONAL -->
+  <!-- =============================== -->
+  <section id="marco">
+    <p class="section-number">04 &mdash; Marco normativo e institucional</p>
+    <h2 class="section-title">Anclaje jurídico<br>e institucional</h2>
+    <p class="section-lead">
+      La arquitectura operativa se inscribe en el entramado normativo vigente
+      y en un enfoque de política pública basada en evidencia.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <span class="card-tag tag-navy">Constitucional</span>
+        <h4>Art. 115 &mdash; Competencias municipales</h4>
+        <p>
+          Servicios públicos, zonificación, uso de suelo y catastro como
+          competencias exclusivas del municipio. Tlaquepaque Digital convierte
+          estas competencias en estándares medibles (Q*).
+        </p>
+      </div>
+      <div class="card">
+        <span class="card-tag tag-blue">Territorial</span>
+        <h4>LGAHOTDU (2016)</h4>
+        <p>
+          La Ley General exige planeación territorial basada en evidencia,
+          participación ciudadana y coordinación intergubernamental.
+          El sistema opera en este mandato.
+        </p>
+      </div>
+      <div class="card">
+        <span class="card-tag tag-lightblue">Presupuestal</span>
+        <h4>PbR / SED &mdash; SHCP</h4>
+        <p>
+          El componente PbR/MIR es obligación legal: todo recurso público
+          debe vincularse a indicadores, metas y medios de verificación
+          (Ley Federal de Presupuesto).
+        </p>
+      </div>
+      <div class="card">
+        <span class="card-tag tag-red">Evaluaci&oacute;n</span>
+        <h4>CONEVAL &mdash; Medici&oacute;n multidimensional</h4>
+        <p>
+          El modelo de brechas adapta la l&oacute;gica de medici&oacute;n multidimensional
+          de la pobreza al &aacute;mbito municipal: mide la distancia entre est&aacute;ndar
+          y realidad, colonia por colonia.
+        </p>
+      </div>
+    </div>
+
+    <div class="cards" style="margin-top: 20px;">
+      <div class="card" style="grid-column: 1 / -1; border-color: var(--red);">
+        <span class="card-tag tag-red">Nueva &mdash; DOF jul. 2025</span>
+        <h4>Ley Nacional para Eliminar Tr&aacute;mites Burocr&aacute;ticos (LNETB)</h4>
+        <p>
+          Obliga a los tres &oacute;rdenes de gobierno a simplificar, digitalizar e interoperar.
+          Establece 4&nbsp;modelos nacionales obligatorios, Agenda de Simplificaci&oacute;n,
+          Portal Ciudadano &Uacute;nico (Llave&nbsp;MX), Expediente Digital Ciudadano y
+          Registro Nacional de Regulaciones. Impacta directamente en tres componentes de la
+          arquitectura: <strong>Mejora Regulatoria</strong> (Eje&nbsp;1),
+          <strong>IDE / Sistemas de informaci&oacute;n</strong> (capa habilitadora) y
+          <strong>Participaci&oacute;n ciudadana</strong> (servicio centrado en la persona).
+          Los plazos de armonizaci&oacute;n municipal (180&nbsp;d&iacute;as) ubican a
+          Tlaquepaque en ventana de cumplimiento que esta arquitectura est&aacute; dise&ntilde;ada para atender.
+        </p>
+      </div>
+    </div>
+
+    <div class="quote-block" style="margin-top: 32px;">
+      <p>
+        &ldquo;El desarrollo local efectivo requiere capacidades institucionales
+        que articulen información, decisión y acción pública de manera sostenida.&rdquo;
+        <br><strong>&mdash; Cabrero Mendoza (2005)</strong>
+      </p>
+    </div>
+
+  </section>
+
+  <!-- =============================== -->
+  <!-- 05 ARQUITECTURA -->
+  <!-- =============================== -->
+  <section id="arquitectura">
+    <p class="section-number">05 &mdash; Arquitectura operativa</p>
+
+    <div class="diagram-container wide diagram-embed" id="arqEmbed">
+      <iframe
+        src="proyecto/diagramas/diagra_arquitectura/index.html"
+        title="Diagrama interactivo de arquitectura operativa"
+        loading="lazy"
+        referrerpolicy="no-referrer"
+        style="border: 1px solid #e0e0e0;"
+      ></iframe>
+      <button class="diagram-exit" type="button" id="arqExit">Salir</button>
+      <div class="diagram-overlay" id="arqOverlay" role="button" tabindex="0"
+           aria-label="Activar interacción con el diagrama">
+        <div class="overlay-card">
+          <div class="overlay-title">Clic para interactuar</div>
+          <div class="overlay-text">
+            Para evitar zoom accidental al hacer scroll, el diagrama está bloqueado por defecto.
+            Clic aquí para activarlo. Presiona <strong>Esc</strong> o <strong>Salir</strong> para volver a modo lectura.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a class="diagram-link" href="260216_informe_arquitectura_operativa.pdf"
+       target="_blank" rel="noopener">
+      Ver informe (PDF) &rarr;
+    </a>
+
+  </section>
+
+  <!-- =============================== -->
+  <!-- 06 RETOS CRITICOS -->
+  <!-- =============================== -->
+  <section id="retos">
+    <p class="section-number">06 &mdash; Retos cr&iacute;ticos y blindajes</p>
+    <h2 class="section-title">Riesgos de implementaci&oacute;n<br>y blindajes ejecutivos</h2>
+    <p class="section-lead">
+      Objetivo ejecutivo: recaudar mejor para financiar seguridad urbana preventiva
+      <strong class="accent">sin perder legitimidad social</strong>.
+    </p>
+
+    <div class="risk-grid" style="margin-top: 18px;">
+      <div class="risk-item">
+        <div class="risk-num risk-high">1</div>
+        <div class="risk-text">
+          <h4>Rechazo social a ajustes del predial</h4>
+          <p>Riesgo: percepci&oacute;n de "cobro sin beneficio".</p>
+        </div>
+        <div class="risk-mit">Blindaje: gradualidad + protecci&oacute;n + evidencia barrial</div>
+      </div>
+
+      <div class="risk-item">
+        <div class="risk-num risk-med">2</div>
+        <div class="risk-text">
+          <h4>Debilidad catastral y de cobranza</h4>
+          <p>Riesgo: bajo ingreso efectivo por padr&oacute;n incompleto y morosidad.</p>
+        </div>
+        <div class="risk-mit">Blindaje: depuraci&oacute;n + cobranza segmentada</div>
+      </div>
+
+      <div class="risk-item">
+        <div class="risk-num risk-high">3</div>
+        <div class="risk-text">
+          <h4>Riesgo de captura o desvío del gasto</h4>
+          <p>Riesgo: mayor ingreso sin controles de ejecuci&oacute;n.</p>
+        </div>
+        <div class="risk-mit">Blindaje: compras abiertas + auditor&iacute;a + geotrazabilidad</div>
+      </div>
+
+      <div class="risk-item">
+        <div class="risk-num risk-low">4</div>
+        <div class="risk-text">
+          <h4>Desconexi&oacute;n entre recaudaci&oacute;n y seguridad urbana</h4>
+          <p>Riesgo: recaudar sin mejoras visibles en alumbrado y entorno.</p>
+        </div>
+        <div class="risk-mit">Blindaje: etiqueta territorial para seguridad preventiva</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 30px; margin-bottom: 12px; color: var(--navy); font-size: 1.05rem;">
+      Decisiones de blindaje (nivel directivo)
+    </h3>
+    <div class="q-grid">
+      <div class="q-card">
+        <div class="q-num">A</div>
+        <h4>Regla fiscal de legitimidad</h4>
+        <p>No shock: gradualidad, progresividad y protecci&oacute;n social focalizada.</p>
+      </div>
+      <div class="q-card">
+        <div class="q-num">B</div>
+        <h4>Mandato de recaudaci&oacute;n inteligente</h4>
+        <p>Primero base gravable, subvaluaci&oacute;n alta y cartera vencida.</p>
+      </div>
+      <div class="q-card">
+        <div class="q-num">C</div>
+        <h4>Mandato de gasto trazable</h4>
+        <p>Porci&oacute;n verificable del predial a seguridad urbana preventiva barrial.</p>
+      </div>
+      <div class="q-card">
+        <div class="q-num">D</div>
+        <h4>Mandato de control</h4>
+        <p>Compras abiertas, auditor&iacute;a y validaci&oacute;n ciudadana de resultados.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 30px; margin-bottom: 12px; color: var(--navy); font-size: 1.05rem;">
+      Tablero de control (4 indicadores)
+    </h3>
+    <div class="q-grid">
+      <div class="q-card">
+        <div class="q-num">01</div>
+        <h4>% de padr&oacute;n catastral actualizado</h4>
+        <p>Capacidad recaudatoria estructural.</p>
+      </div>
+      <div class="q-card">
+        <div class="q-num">02</div>
+        <h4>% de recuperaci&oacute;n de cartera vencida</h4>
+        <p>Eficacia de cobranza.</p>
+      </div>
+      <div class="q-card">
+        <div class="q-num">03</div>
+        <h4>% de predial trazado a obra barrial visible</h4>
+        <p>Vinculaci&oacute;n fiscal-territorial.</p>
+      </div>
+      <div class="q-card">
+        <div class="q-num">04</div>
+        <h4>Percepci&oacute;n de seguridad y confianza ciudadana</h4>
+        <p>Legitimidad del modelo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================== -->
+  <!-- 09 CIERRE -->
+  <!-- =============================== -->
+  <section class="close-section" id="cierre">
+    <div class="contact">
+      <p><strong style="color: #fff;">Daniela Res&eacute;ndiz Garc&iacute;a</strong></p>
+      <p style="margin-top: 4px;">
+        <a href="https://danielaresendizg.github.io/es/cv.html" target="_blank" rel="noopener">CV</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://danielaresendizg.github.io/en/publication.html" target="_blank" rel="noopener">Publicaciones</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SCROLL JS ===== -->
+  <script>
+    (function () {
+      const sections = document.querySelectorAll("section");
+      const dots = document.querySelectorAll(".nav-dot");
+      const arqEmbed = document.getElementById("arqEmbed");
+      const arqOverlay = document.getElementById("arqOverlay");
+      const arqExit = document.getElementById("arqExit");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              // Update nav dots
+              const id = entry.target.id;
+              dots.forEach((d) => {
+                d.classList.toggle("active", d.getAttribute("href") === "#" + id);
+              });
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+
+      sections.forEach((s) => observer.observe(s));
+
+      function setDiagramActive(active) {
+        if (!arqEmbed) return;
+        arqEmbed.classList.toggle("is-active", active);
+      }
+
+      function activateDiagram() { setDiagramActive(true); }
+      function deactivateDiagram() { setDiagramActive(false); }
+
+      if (arqOverlay) {
+        arqOverlay.addEventListener("click", activateDiagram);
+        arqOverlay.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            activateDiagram();
+          }
+        });
+      }
+
+      if (arqExit) arqExit.addEventListener("click", deactivateDiagram);
+
+      window.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") deactivateDiagram();
+      });
+
+      // If the user moves away, return to reading mode to avoid trapping scroll.
+      if (arqEmbed) {
+        arqEmbed.addEventListener("mouseleave", function () {
+          window.setTimeout(deactivateDiagram, 120);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+PAQUETE WEB - TLAQUEPAQUE DIGITAL
+
+1) Descomprime este paquete completo.
+2) Abre el archivo: 260216_presentacion_final.html
+3) No muevas archivos de carpeta: el HTML usa rutas relativas.
+
+Incluye:
+- Presentación ejecutiva HTML
+- Informe técnico PDF
+- Diagrama interactivo embebido
+- Imágenes necesarias en local (modo offline)

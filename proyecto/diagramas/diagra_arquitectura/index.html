@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Propuesta — Tlaquepaque Digital</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div>
+        <h1 class="title">Propuesta</h1>
+        <p class="subtitle">Arquitectura operativa — Tlaquepaque Digital</p>
+      </div>
+    </header>
+
+    <div class="main-area">
+      <!-- ===== VISOR DEL DIAGRAMA ===== -->
+      <div class="viewer" id="viewer">
+        <div class="diagram" id="diagram">
+          <div class="diagram-content">
+
+          <!-- Fases -->
+          <div class="phase" style="top:167px;">DEFINIR</div>
+          <div class="phase" style="top:307px;">MEDIR</div>
+          <div class="phase" style="top:477px;">SINTETIZAR</div>
+          <div class="phase" style="top:657px;">DECIDIR</div>
+          <div class="phase" style="top:817px;">FINANCIAR</div>
+          <div class="phase" style="top:980px;">APRENDER</div>
+
+          <!-- Divisores de etapa -->
+          <div class="stage-divider" style="top:200px;"></div>
+          <div class="stage-divider" style="top:340px;"></div>
+          <div class="stage-divider" style="top:510px;"></div>
+          <div class="stage-divider" style="top:690px;"></div>
+          <div class="stage-divider" style="top:850px;"></div>
+          <div class="stage-divider" style="top:1013px;"></div>
+
+          <!-- Ejes -->
+
+          <!-- NODO 1: Mejora Regulatoria -->
+          <article class="node n-e1" style="left:250px; top:170px;">
+            <h4>Mejora Regulatoria</h4>
+            <p>Simplificación y digitalización de trámites.</p>
+          </article>
+
+          <!-- NODO 2: CTM -->
+          <article class="node n-e2" style="left:1250px; top:170px;">
+            <h4>CTM / Datos Territoriales</h4>
+            <p>Catastro, padrón y cartografía base.</p>
+          </article>
+
+          <!-- NODO 3: Brechas -->
+          <article class="node n-e2" style="left:760px; top:320px;">
+            <h4>Modelo de Brechas</h4>
+            <p>Estándar vs medición (Q* → Qi → Bi).</p>
+          </article>
+
+          <!-- NODO 4: Índice -->
+          <article class="node n-e2" style="left:760px; top:500px;">
+            <h4>Índice de Bienestar Municipal</h4>
+            <p>Ranking territorial para priorizar inversión.</p>
+          </article>
+
+          <!-- NODO 5: Participación Ciudadana -->
+          <article class="node n-tr" style="left:1480px; top:682px;">
+            <h4>Participación Ciudadana</h4>
+            <p>Ponderación y validación ciudadana.</p>
+          </article>
+
+          <!-- NODO 6: Portafolio -->
+          <article class="node n-e3" style="left:760px; top:680px;">
+            <h4>Portafolio de Proyectos</h4>
+            <p>Priorización y factibilidad de proyectos.</p>
+          </article>
+
+          <!-- NODO 7: PbR -->
+          <article class="node n-e3" style="left:760px; top:840px;">
+            <h4>PbR / MIR</h4>
+            <p>Metas, indicadores y evidencia presupuestal.</p>
+          </article>
+
+          <!-- NODO 8: M&E -->
+          <article class="node n-e3" style="left:760px; top:1000px;">
+            <h4>Monitoreo y Evaluación (M&amp;E)</h4>
+            <p>Re-medición y ajustes de ejecución.</p>
+          </article>
+
+          <!-- RESULTADOS -->
+          <div class="result" style="left:1490px; top:842px;">
+            Ejecución territorial
+            <small>obras/servicios implementados</small>
+          </div>
+          <div class="result result-ingresos" style="left:1885px; top:840px;">
+            Ingresos propios y sostenibilidad fiscal
+            <small>predial + eficiencia de cobro + base gravable</small>
+          </div>
+          <div class="result" style="left:1490px; top:942px;">
+            Bienestar / cierre de brechas
+            <small>resultados en territorio</small>
+          </div>
+          <div class="result" style="left:1490px; top:1040px;">
+            Confianza / legitimidad
+            <small>señal política y social</small>
+          </div>
+
+          <!-- NODO 9: IDE -->
+          <div class="ide-lane">
+            IDE — Infraestructura de Datos Espaciales / Sistemas de Información
+            <small>Interoperabilidad y calidad de datos</small>
+          </div>
+
+          <!-- ===== FLECHAS SVG ===== -->
+          <svg class="links" viewBox="0 0 3000 2300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <marker id="dotMain" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto">
+                <circle cx="5" cy="5" r="3.2" fill="#0f172a" />
+              </marker>
+              <marker id="dotRetro" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto">
+                <circle cx="5" cy="5" r="3.2" fill="#00134d" />
+              </marker>
+              <marker id="dotPart" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto">
+                <circle cx="5" cy="5" r="3.2" fill="#ff0000" />
+              </marker>
+              <marker id="dotFiscal" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto">
+                <circle cx="5" cy="5" r="3.2" fill="#ff0000" fill-opacity="0.7" />
+              </marker>
+              <marker id="dotCond" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto">
+                <circle cx="5" cy="5" r="3.2" fill="#7f7f7f" />
+              </marker>
+              <marker id="dotIde" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto">
+                <circle cx="5" cy="5" r="3.2" fill="#0000ff" />
+              </marker>
+              <marker id="arrowMain" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="4.4" markerHeight="4.4" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#0000ff" />
+              </marker>
+              <marker id="arrowRetro" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#7f7f7f" />
+              </marker>
+              <marker id="arrowPart" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#ff0000" />
+              </marker>
+              <marker id="arrowFiscal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#ff0000" fill-opacity="0.7" />
+              </marker>
+              <marker id="arrowIde" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#0000ff" />
+              </marker>
+              <marker id="arrowCond" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#7f7f7f" />
+              </marker>
+              <marker id="arrowLoopR1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(0, 0, 255, 0.55)" />
+              </marker>
+              <marker id="arrowLoopR2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(40, 40, 255, 0.45)" />
+              </marker>
+              <marker id="arrowLoopR3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(80, 80, 255, 0.40)" />
+              </marker>
+              <marker id="arrowLoopB1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(0, 0, 255, 0.35)" />
+              </marker>
+              <linearGradient id="r1HaloGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0000ff" stop-opacity="0.10"/>
+                <stop offset="55%" stop-color="#0000ff" stop-opacity="0.07"/>
+                <stop offset="100%" stop-color="#0000ff" stop-opacity="0.04"/>
+              </linearGradient>
+              <filter id="r1HaloSoft" x="-10%" y="-10%" width="120%" height="120%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="1.0"/>
+              </filter>
+            </defs>
+
+            <!-- Halos por loop (una sola figura por loop) -->
+            <path class="loop-layer loop-r1-el loop-halo-shape" fill="url(#r1HaloGrad)" filter="url(#r1HaloSoft)" d="M 764 664 H 1056 Q 1076 664 1076 684 V 862 H 1454 Q 1474 862 1474 842 V 846 Q 1474 826 1494 826 H 1744 Q 1764 826 1764 846 V 906 Q 1764 926 1744 926 H 1494 Q 1474 926 1474 906 V 914 Q 1474 934 1454 934 H 1076 V 1102 Q 1076 1122 1056 1122 H 764 Q 744 1122 744 1102 V 684 Q 744 664 764 664 Z"/>
+            <path class="loop-layer loop-r3-el loop-halo-shape" fill="url(#r1HaloGrad)" filter="url(#r1HaloSoft)" d="M 234 154 H 566 Q 582 154 582 170 V 288 Q 582 304 598 304 H 1076 Q 1092 304 1092 320 V 426 Q 1092 442 1076 442 H 234 Q 218 442 218 426 V 170 Q 218 154 234 154 Z"/>
+            <path class="loop-layer loop-b1-el loop-halo-shape" fill="url(#r1HaloGrad)" filter="url(#r1HaloSoft)" d="M 764 664 H 1056 Q 1076 664 1076 684 V 1102 Q 1076 1122 1056 1122 H 764 Q 744 1122 744 1102 V 684 Q 744 664 764 664 Z"/>
+            <path class="loop-layer loop-r2-el loop-halo-shape" fill="url(#r1HaloGrad)" filter="url(#r1HaloSoft)" d="M 1476 676 H 1772 Q 1792 676 1792 696 V 926 Q 1792 946 1772 946 H 1476 Q 1456 946 1456 926 V 696 Q 1456 676 1476 676 Z"/>
+            <path class="loop-layer loop-r2-el loop-halo-shape" fill="url(#r1HaloGrad)" filter="url(#r1HaloSoft)" d="M 1476 1034 H 1772 Q 1792 1034 1792 1054 V 1122 Q 1792 1142 1772 1142 H 1476 Q 1456 1142 1456 1122 V 1054 Q 1456 1034 1476 1034 Z"/>
+
+            <!-- Flujo principal -->
+            <path class="flow-main" d="M 550 223 H 760 Q 790 223 790 253 V 320" stroke="#0000ff" stroke-width="3" fill="none" marker-end="url(#arrowMain)"/>
+            <path class="flow-main" d="M 1250 223 H 1060 Q 1030 223 1030 253 V 320" stroke="#0000ff" stroke-width="3" fill="none" marker-end="url(#arrowMain)"/>
+            <line class="flow-main" x1="910" y1="426" x2="910" y2="500" stroke="#0000ff" stroke-width="3" marker-end="url(#arrowMain)"/>
+            <line class="flow-main" x1="910" y1="606" x2="910" y2="680" stroke="#0000ff" stroke-width="3" marker-end="url(#arrowMain)"/>
+            <line class="flow-main" x1="910" y1="786" x2="910" y2="840" stroke="#0000ff" stroke-width="3" marker-end="url(#arrowMain)"/>
+            <line class="flow-main" x1="910" y1="946" x2="910" y2="1000" stroke="#0000ff" stroke-width="3" marker-end="url(#arrowMain)"/>
+
+            <line class="flow-main" x1="1060" y1="893" x2="1490" y2="893" stroke="#0000ff" stroke-width="3" marker-end="url(#arrowMain)"/>
+            <line class="flow-main" x1="1619" y1="910" x2="1619" y2="942" stroke="#0000ff" stroke-width="3" marker-end="url(#arrowMain)"/>
+            <line class="flow-main" x1="1619" y1="1010" x2="1619" y2="1040" stroke="#0000ff" stroke-width="3" marker-end="url(#arrowMain)"/>
+            <path class="flow-main" d="M 1490 910 H 1140 Q 1110 910 1110 940 V 1018 Q 1110 1048 1080 1048 H 1060" stroke="#0000ff" stroke-width="2.8" fill="none" marker-end="url(#arrowMain)"/>
+
+            <!-- Participación ciudadana (cruce) -->
+            <path class="flow-participacion" d="M 1630 682 V 704 Q 1630 724 1610 724 H 1060" stroke="#ff0000" stroke-width="2.2" stroke-dasharray="4 8" fill="none" marker-end="url(#arrowPart)"/>
+            <path class="flow-participacion" d="M 1630 682 H 1700 Q 1720 682 1720 662 V 576 Q 1720 556 1700 556 H 1060" stroke="#ff0000" stroke-width="2.2" stroke-dasharray="4 8" fill="none" marker-end="url(#arrowPart)"/>
+            <path class="flow-participacion" d="M 1480 755 H 1180 Q 1160 755 1160 775 V 1028 Q 1160 1048 1140 1048 H 1060" stroke="#ff0000" stroke-width="2.2" stroke-dasharray="4 8" fill="none" marker-end="url(#arrowPart)"/>
+            <path class="flow-participacion" d="M 1762 1074 H 1825 Q 1845 1074 1845 1054 V 780 Q 1845 760 1825 760 H 1792" stroke="#ff0000" stroke-width="2.2" stroke-dasharray="4 8" fill="none" marker-start="url(#dotPart)" marker-end="url(#arrowPart)"/>
+
+            <!-- Condicionales -->
+            <path class="flow-condicional" d="M 1748 976 H 1848 Q 1868 976 1868 956 V 905 Q 1868 885 1888 885" stroke="#7f7f7f" stroke-width="1.9" stroke-dasharray="5 8" fill="none" marker-start="url(#dotCond)" marker-end="url(#arrowCond)"/>
+            <path class="flow-condicional" d="M 1060 553 H 1190 Q 1210 553 1210 533 V 306 Q 1210 286 1230 286 H 1250" stroke="#7f7f7f" stroke-width="1.9" stroke-dasharray="5 8" fill="none" marker-start="url(#dotCond)" marker-end="url(#arrowCond)"/>
+
+            <!-- Retroalimentación -->
+            <path class="flow-feedback" d="M 760 1038 H 600 Q 580 1038 580 1018 V 393 Q 580 373 600 373 H 760" stroke="#7f7f7f" stroke-width="1.1" fill="none" marker-end="url(#arrowRetro)"/>
+            <path class="flow-feedback" d="M 1060 1053 H 1226 Q 1246 1053 1246 1033 V 573 Q 1246 553 1226 553 H 1060" stroke="#7f7f7f" stroke-width="1.1" fill="none" marker-end="url(#arrowRetro)"/>
+            <path class="flow-feedback" d="M 760 1070 H 200 Q 180 1070 180 1050 V 243 Q 180 223 200 223 H 250" stroke="#7f7f7f" stroke-width="1.1" fill="none" marker-end="url(#arrowRetro)"/>
+
+            <!-- Loops explícitos R/B (ocultos; se leen con chips + halo) -->
+
+            <!-- IDE conexiones (ancladas a nodos) -->
+            <line class="flow-ide" x1="400" y1="1188" x2="400" y2="260" stroke="#0000ff" stroke-width="2.8" stroke-dasharray="6 7" marker-start="url(#arrowIde)" marker-end="url(#arrowIde)"/>
+            <line class="flow-ide" x1="1400" y1="1188" x2="1400" y2="260" stroke="#0000ff" stroke-width="2.8" stroke-dasharray="6 7" marker-start="url(#arrowIde)" marker-end="url(#arrowIde)"/>
+            <!-- Índice ↔ IDE: conexión en L (horizontal desde lateral del box y luego vertical a IDE) -->
+            <path class="flow-ide" d="M 1076 553 H 1110 Q 1128 553 1128 571 V 1188" stroke="#0000ff" stroke-width="2.8" stroke-dasharray="6 7" fill="none" marker-start="url(#arrowIde)" marker-end="url(#arrowIde)"/>
+            <line class="flow-ide" x1="910" y1="1188" x2="910" y2="1088" stroke="#0000ff" stroke-width="2.8" stroke-dasharray="6 7" marker-start="url(#arrowIde)" marker-end="url(#arrowIde)"/>
+
+            <!-- Canal fiscal (al final para quedar encima en cruces) -->
+            <!-- 1) CTM → Resultado financiero (padrón/valuación) -->
+            <path class="flow-fiscal" d="M 1498 286 V 360 Q 1498 390 1528 390 H 1855 Q 1885 390 1885 420 V 840" stroke="#ff0000" stroke-width="2.2" stroke-opacity="0.45" stroke-dasharray="8 6" fill="none" marker-start="url(#dotFiscal)" marker-end="url(#arrowFiscal)"/>
+            <!-- 2) Resultado financiero → PbR (capacidad de inversión) -->
+            <path class="flow-fiscal" d="M 2014 840 V 820 H 1080 Q 1060 820 1060 840" stroke="#ff0000" stroke-width="2.2" stroke-opacity="0.45" stroke-dasharray="8 6" fill="none" marker-start="url(#dotFiscal)" marker-end="url(#arrowFiscal)"/>
+            <!-- 3) Resultado financiero → CTM (reinversión/actualización) -->
+            <path class="flow-fiscal" d="M 2148 840 V 245 Q 2148 223 2126 223 H 1550" stroke="#ff0000" stroke-width="2.2" stroke-opacity="0.45" stroke-dasharray="8 6" fill="none" marker-start="url(#dotFiscal)" marker-end="url(#arrowFiscal)"/>
+
+          </svg>
+
+          <!-- Etiquetas de flujo -->
+          <div class="edge-label fiscal flow-fiscal" style="left:1670px; top:368px;">padrón / valuación</div>
+          <div class="edge-label fiscal flow-fiscal" style="left:1460px; top:804px;">capacidad de inversión</div>
+          <div class="edge-label fiscal flow-fiscal" style="left:1860px; top:246px;">reinversión / actualización</div>
+
+          <div class="edge-label soft flow-participacion" style="left:1260px; top:704px;">ponderación ciudadana</div>
+          <div class="edge-label soft flow-participacion" style="left:1330px; top:536px;">pesos relativos</div>
+          <div class="edge-label soft flow-participacion" style="left:1118px; top:848px;">validación social</div>
+          <div class="edge-label soft flow-condicional" style="left:1776px; top:948px; color:#7f7f7f; border-color:#7f7f7f;">base gravable</div>
+          <div class="edge-label soft flow-condicional" style="left:1120px; top:432px; color:#7f7f7f; border-color:#7f7f7f;">zonificación / entorno</div>
+          <div class="edge-label flow-feedback flow-feedback-label" style="left:154px; top:432px;">ajustar Q* / vacíos</div>
+          <div class="edge-label flow-feedback flow-feedback-label" style="left:632px; top:524px;">re-medir Qi</div>
+          <div class="edge-label flow-feedback flow-feedback-label" style="left:1118px; top:612px;">actualizar índice</div>
+          <!-- Leyendas IDE removidas (solo conexiones) -->
+
+
+          <!-- Loops (toggleable) — chips posicionados sobre su flecha de feedback -->
+          <div class="loop-layer" data-loop>
+            <div class="loop-chip loop-r3 loop-r3-el" style="left:620px; top:292px;">R3<small>regulaci&oacute;n</small></div>
+            <div class="loop-chip loop-r1 loop-r1-el" style="left:1120px; top:860px;">R1<small>evidencia</small></div>
+            <div class="loop-chip loop-b1 loop-b1-el" style="left:1092px; top:968px;">B1<small>calidad</small></div>
+            <div class="loop-chip loop-r2 loop-r2-el" style="left:1808px; top:980px;">R2<small>legitimidad</small></div>
+          </div>
+          </div>
+        </div>
+
+        <div class="viewer-hint" id="viewerHint">Arrastra para mover · Rueda para zoom · FIT para encuadrar</div>
+        <div class="zoom-info" id="zoomInfo">100%</div>
+      </div>
+
+      <div class="splitter" id="splitter" title="Arrastra para ajustar ancho del panel"></div>
+
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-section">
+          <div class="zoom-panel">
+            <button class="btn zoom-step" id="zoomOut" type="button" aria-label="Alejar">-</button>
+            <input type="range" id="zoomSlider" class="zoom-slider" min="4" max="1200" step="1" value="100" aria-label="Control de zoom">
+            <button class="btn zoom-step" id="zoomIn" type="button" aria-label="Acercar">+</button>
+          </div>
+          <div class="zoom-actions">
+            <button class="btn" id="zoomFit" type="button" title="Ajustar">FIT</button>
+            <button class="btn" id="resetView" type="button">Restablecer vista</button>
+            <button class="btn" id="resetFilters" type="button">Restablecer filtros</button>
+          </div>
+          <div class="meta-line"><strong>Zoom:</strong> <span id="zoomInfoPanel">100%</span></div>
+        </div>
+
+        <!-- Capas -->
+        <div class="sidebar-section">
+          <h5>Capas</h5>
+          <div class="legend-row"><span class="arrow-sample sample-main"></span><span class="legend-text">Flujo principal</span><button class="flow-toggle-btn active" data-flow="main" type="button">ON</button></div>
+          <div class="legend-row"><span class="arrow-sample sample-feedback"></span><span class="legend-text">Retroalimentación</span><button class="flow-toggle-btn" data-flow="feedback" type="button">OFF</button></div>
+          <div class="legend-row"><span class="arrow-sample sample-participacion"></span><span class="legend-text">Participación ciudadana</span><button class="flow-toggle-btn" data-flow="participacion" type="button">OFF</button></div>
+          <div class="legend-row"><span class="arrow-sample sample-ide"></span><span class="legend-text">Infraestructura de datos (IDE)</span><button class="flow-toggle-btn" data-flow="ide" type="button">OFF</button></div>
+          <div class="legend-note">IDE es transversal: aquí se dibujan solo anclas de integración (regulación, CTM, índice, M&amp;E), no todas las integraciones entre áreas.</div>
+          <div class="legend-row"><span class="arrow-sample sample-fiscal"></span><span class="legend-text">Canal fiscal</span><button class="flow-toggle-btn" data-flow="fiscal" type="button">OFF</button></div>
+          <div class="legend-row"><span class="arrow-sample sample-condicional"></span><span class="legend-text">Condicional</span><button class="flow-toggle-btn" data-flow="condicional" type="button">OFF</button></div>
+        </div>
+
+        <!-- Leyenda -->
+        <div class="sidebar-section">
+          <h5>Leyenda</h5>
+          <div class="legend-row"><span class="dot" style="border-color:#00134d;background:#00134d"></span> <strong style="background:#00134d;color:#ffffff;padding:0 8px;border-radius:6px;">EJE 1</strong> Mejora regulatoria</div>
+          <div class="legend-row"><span class="dot" style="border-color:#0000ff;background:#0000ff"></span> <strong style="background:#0000ff;color:#ffffff;padding:0 8px;border-radius:6px;">EJE 2</strong> Datos / medición</div>
+          <div class="legend-row"><span class="dot" style="border-color:#c5e2ff;background:#c5e2ff"></span> <strong style="background:#c5e2ff;color:#0000ff;padding:0 8px;border-radius:6px;">EJE 3</strong> Gestión por resultados</div>
+          <div class="legend-row"><span class="dot" style="border-color:#ff0000;background:#ff0000"></span> <strong style="background:#ff0000;color:#ffffff;padding:0 8px;border-radius:6px;">TRANS</strong> Participación</div>
+          <div class="legend-row"><span class="dot" style="border-color:#0000ff;background:#ffffff"></span> Resultado general</div>
+          <div class="legend-row"><span class="dot" style="border-color:#ff0000;background:#ffffff"></span> Resultado fiscal</div>
+        </div>
+
+
+        <!-- Loops -->
+        <div class="sidebar-section">
+          <h5>Loops</h5>
+          <div class="legend-row"><span class="dot" style="border-color:#0000ff;background:rgba(0,0,255,0.18)"></span><span class="legend-text"><strong style="color:#0000ff;">R1</strong> Evidencia</span><button class="flow-toggle-btn" data-loop-id="r1" type="button">OFF</button></div>
+          <div class="legend-row"><span class="dot" style="border-color:#1b1bff;background:rgba(27,27,255,0.18)"></span><span class="legend-text"><strong style="color:#1b1bff;">R2</strong> Legitimidad</span><button class="flow-toggle-btn" data-loop-id="r2" type="button">OFF</button></div>
+          <div class="legend-row"><span class="dot" style="border-color:#2f2fff;background:rgba(47,47,255,0.18)"></span><span class="legend-text"><strong style="color:#2f2fff;">R3</strong> Regulación</span><button class="flow-toggle-btn" data-loop-id="r3" type="button">OFF</button></div>
+          <div class="legend-row"><span class="dot" style="border-color:#0000cc;background:rgba(0,0,204,0.14)"></span><span class="legend-text"><strong style="color:#0000cc;">B1</strong> Balance / control</span><button class="flow-toggle-btn" data-loop-id="b1" type="button">OFF</button></div>
+          <div class="loop-info loop-dict" style="margin-top:8px;">
+            <p>R1: evidencia → mejor decisión → mejor ejecución → más evidencia.</p>
+            <p>R3: regulación → menos fricción → más adopción → más simplificación.</p>
+            <p>B1: M&amp;E → ajustes rápidos → estabilidad del sistema.</p>
+            <p>R2: confianza → participación → legitimidad → más confianza.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

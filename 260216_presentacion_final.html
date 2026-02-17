@@ -488,6 +488,18 @@
       display: block;
     }
 
+    .diagram-mobile-note {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border: 1px solid #d9e5ff;
+      border-radius: 10px;
+      background: #f6f9ff;
+      color: var(--navy);
+      font-size: 0.78rem;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
     /* Full-bleed diagram only where we opt-in (e.g., Arquitectura). */
     @media (min-width: 769px) {
       .diagram-container.wide {
@@ -1219,10 +1231,7 @@
 
     <div class="diagram-mobile" aria-label="Vista simplificada del diagrama en móvil">
       <img src="img/fig_01_arquitectura.png" alt="Diagrama de arquitectura operativa de Tlaquepaque Digital" />
-      <a class="diagram-link" href="proyecto/diagramas/diagra_arquitectura/index.html?panel=off&v=20260217b"
-         target="_blank" rel="noopener">
-        Abrir diagrama interactivo &rarr;
-      </a>
+      <p class="diagram-mobile-note">En móvil se muestra solo la vista estática. El diagrama interactivo está disponible en escritorio.</p>
     </div>
 
     <a class="diagram-link" href="260216_informe_arquitectura_operativa.pdf"

@@ -126,6 +126,7 @@
       position: relative;
       overflow: hidden;
       cursor: grab;
+      touch-action: none;
       background:
         repeating-linear-gradient(0deg, #f0f0f0 0 1px, #ffffff 1px 40px);
     }
@@ -197,6 +198,10 @@
     }
 
     .zoom-btn:hover { background: #edf5ff; }
+    .zoom-btn--fit {
+      font-size: 0.64rem;
+      letter-spacing: 0.05em;
+    }
     .zoom-info {
       position: absolute;
       bottom: 16px;
@@ -210,6 +215,21 @@
       z-index: 5;
       pointer-events: none;
       display: none;
+    }
+
+    .app.panel-collapsed .sidebar,
+    .app.panel-collapsed .splitter {
+      display: none !important;
+    }
+
+    .app.panel-collapsed .zoom-controls { display: flex; }
+    .app.panel-collapsed .zoom-info {
+      display: block;
+      left: 138px;
+    }
+
+    .app.panel-collapsed .viewer {
+      min-height: 0;
     }
 
     /* ===== SIDEBAR ===== */
@@ -847,18 +867,47 @@
     }
 
     /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .topbar {
+        padding: 6px 8px;
+      }
+      .title {
+        font-size: clamp(1.02rem, 2.5vw, 1.38rem);
+      }
+      .subtitle {
+        margin-top: 4px;
+        font-size: 0.62rem;
+        letter-spacing: 0.05em;
+      }
+      .viewer {
+        background: #ffffff;
+      }
+      .viewer-hint {
+        display: none;
+      }
+      .zoom-controls {
+        bottom: 12px;
+        left: 12px;
+      }
+      .zoom-info {
+        bottom: 12px;
+        left: 132px;
+      }
+    }
+
     @media (max-width: 760px) {
       :root { --sidebar-w: 100%; }
       .main-area { flex-direction: column; }
-      .viewer { min-height: 55vh; }
+      .viewer { min-height: 60vh; }
       .sidebar {
         border-left: none;
         border-top: 1px solid #d0d0d0;
-        max-height: 44vh;
+        max-height: 40vh;
       }
       .splitter { display: none; }
       .topbar { flex-direction: column; align-items: flex-start; gap: 8px; }
-      .title { font-size: clamp(2rem, 9vw, 3.6rem); }
+      .title { font-size: clamp(1.02rem, 5vw, 1.35rem); }
+      .subtitle { font-size: 0.60rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {

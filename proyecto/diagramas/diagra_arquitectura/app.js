@@ -11,6 +11,9 @@
       const zoomSlider = document.getElementById("zoomSlider");
       const zoomInBtn = document.getElementById("zoomIn");
       const zoomOutBtn = document.getElementById("zoomOut");
+      const zoomInFloatingBtn = document.getElementById("zoomInFloating");
+      const zoomOutFloatingBtn = document.getElementById("zoomOutFloating");
+      const zoomFitFloatingBtn = document.getElementById("zoomFitFloating");
       const resetViewBtn = document.getElementById("resetView");
       const resetFiltersBtn = document.getElementById("resetFilters");
       const viewerHint = document.getElementById("viewerHint");
@@ -23,8 +26,8 @@
       const CONTENT_OFFSET_Y = 100;
       const CONTENT_BASE_SCALE = 1.35;
       const FIT_MARGIN = 36;
-      // Slightly zoomed-out fit so the full system breathes on first load and after FIT/Reset.
-      const FIT_SCALE_MULTIPLIER = 0.90;
+      const FIT_SCALE_MULTIPLIER_DESKTOP = 0.90;
+      const FIT_SCALE_MULTIPLIER_COMPACT = 1.02;
       const MIN_SCALE = 0.04;
       const MAX_SCALE = 12.0;
 
@@ -40,6 +43,16 @@
       // More compact UI by default (closer to how it looked at browser zoom ~33%).
       const DEFAULT_SIDEBAR_RATIO = 0.22;
       let lastNonZeroSidebarWidth = 380;
+      let panelCollapsed = false;
+      let panelCollapseForced = null;
+
+      function isCompactViewport() {
+        return window.matchMedia("(max-width: 1024px)").matches;
+      }
+
+      function getFitScaleMultiplier() {
+        return isCompactViewport() ? FIT_SCALE_MULTIPLIER_COMPACT : FIT_SCALE_MULTIPLIER_DESKTOP;
+      }
 
       function getDefaultSidebarWidth() {
         return Math.round(Math.min(440, Math.max(260, mainArea.clientWidth * DEFAULT_SIDEBAR_RATIO)));
@@ -119,7 +132,7 @@
         const fitW = contentW + FIT_MARGIN * 2;
         const fitH = contentH + FIT_MARGIN * 2;
         const fitScale = Math.min(vw / fitW, vh / fitH);
-        scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, fitScale * FIT_SCALE_MULTIPLIER));
+        scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, fitScale * getFitScaleMultiplier()));
         panX = (vw - contentW * scale) / 2 - contentX * scale;
         panY = (vh - contentH * scale) / 2 - contentY * scale;
         applyTransform();
@@ -206,13 +219,31 @@
 
         const panelParam = (params.get("panel") || "").toLowerCase();
         if (exportMode || panelParam === "off" || panelParam === "0" || panelParam === "false") {
-          // After toggles are applied, collapse the panel to maximize the diagram area.
-          setSidebarWidth(1);
+          panelCollapseForced = true;
+        } else if (panelParam === "on" || panelParam === "1" || panelParam === "true") {
+          panelCollapseForced = false;
         }
+        setPanelCollapsed(panelCollapseForced === null ? isCompactViewport() : panelCollapseForced);
+      }
+
+      function setPanelCollapsed(collapsed) {
+        panelCollapsed = Boolean(collapsed);
+        app.classList.toggle("panel-collapsed", panelCollapsed);
+        if (!panelCollapsed) {
+          const fallback = lastNonZeroSidebarWidth > 1 ? lastNonZeroSidebarWidth : getDefaultSidebarWidth();
+          const maxWidth = Math.max(220, mainArea.clientWidth - 120);
+          const width = Math.max(1, Math.min(maxWidth, Math.round(fallback)));
+          sidebar.style.width = width + "px";
+          lastNonZeroSidebarWidth = width;
+        }
+        fitToView();
       }
 
 
       function setSidebarWidth(px) {
+        if (panelCollapsed) {
+          return;
+        }
         const maxWidth = Math.max(220, mainArea.clientWidth - 120);
         const width = Math.max(1, Math.min(maxWidth, Math.round(px)));
         sidebar.style.width = width + "px";
@@ -347,11 +378,22 @@
       document.getElementById("zoomFit").addEventListener("click", fitToView);
       if (zoomInBtn) zoomInBtn.addEventListener("click", function () { zoomByFactor(1.2); });
       if (zoomOutBtn) zoomOutBtn.addEventListener("click", function () { zoomByFactor(1 / 1.2); });
+      if (zoomInFloatingBtn) zoomInFloatingBtn.addEventListener("click", function () { zoomByFactor(1.2); });
+      if (zoomOutFloatingBtn) zoomOutFloatingBtn.addEventListener("click", function () { zoomByFactor(1 / 1.2); });
+      if (zoomFitFloatingBtn) zoomFitFloatingBtn.addEventListener("click", fitToView);
       if (resetViewBtn) resetViewBtn.addEventListener("click", fitToView);
       if (resetFiltersBtn) resetFiltersBtn.addEventListener("click", resetFilters);
 
       // Re-fit y ajuste responsivo de panel en resize
       window.addEventListener("resize", function () {
+        if (panelCollapseForced === null) {
+          setPanelCollapsed(isCompactViewport());
+          return;
+        }
+        if (panelCollapsed) {
+          fitToView();
+          return;
+        }
         const panelVisible = Math.round(sidebar.getBoundingClientRect().width) > 2;
         if (panelVisible) {
           setSidebarWidth(getDefaultSidebarWidth());

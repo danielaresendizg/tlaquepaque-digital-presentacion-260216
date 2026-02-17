@@ -474,6 +474,20 @@
       margin: 20px 0;
     }
 
+    .diagram-mobile {
+      display: none;
+      max-width: 1120px;
+      width: 100%;
+      margin: 20px 0;
+    }
+
+    .diagram-mobile img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #e0e0e0;
+      display: block;
+    }
+
     /* Full-bleed diagram only where we opt-in (e.g., Arquitectura). */
     @media (min-width: 769px) {
       .diagram-container.wide {
@@ -909,6 +923,11 @@
       .chain-arrow { transform: rotate(90deg); text-align: center; }
     }
 
+    @media (max-width: 1024px) {
+      #arquitectura .diagram-embed { display: none; }
+      #arquitectura .diagram-mobile { display: block; }
+    }
+
     @media (max-width: 1024px) and (orientation: portrait) {
       .orientation-lock { display: flex; }
       .nav { display: none; }
@@ -1196,6 +1215,14 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="diagram-mobile" aria-label="Vista simplificada del diagrama en móvil">
+      <img src="img/fig_01_arquitectura.png" alt="Diagrama de arquitectura operativa de Tlaquepaque Digital" />
+      <a class="diagram-link" href="proyecto/diagramas/diagra_arquitectura/index.html?panel=off"
+         target="_blank" rel="noopener">
+        Abrir diagrama interactivo &rarr;
+      </a>
     </div>
 
     <a class="diagram-link" href="260216_informe_arquitectura_operativa.pdf"
